@@ -1,0 +1,6 @@
+[Match]
+Name=enp0s3
+
+[Network]  
+Address=192.168.1.158/24  
+Gateway=192.168.1.1
