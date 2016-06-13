@@ -22,12 +22,24 @@ coreos:
       command: start
     - name: flanneld.service
       drop-ins:
-      - name: 50-network-config.conf
-        content: |
-          [Service]
-#应当如何用这个例子呢          
-          ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{ "Network": "10.1.0.0/16" }'
-      command: start
+#另外一种写法
+#      - name: 50-network-config.conf
+#        content: |
+#
+#          [Service]
+#          ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{ "Network": "10.1.0.0/16" }'
+#      command: start
+      - name: static.network  
+      content: |  
+        [Match]  
+        Name=enp0s3  
+  
+        [Network]  
+        Address=192.168.1.158/24  
+        Gateway=192.168.1.1  
+        DNS=8.8.8.8  
+        DNS=8.8.4.4
+>>>>>>> config.network
     - name: docker-tcp.socket
       command: start
       enable: true
