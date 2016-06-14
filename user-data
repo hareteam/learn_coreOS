@@ -23,22 +23,22 @@ coreos:
     - name: flanneld.service
       drop-ins:
 #另外一种写法
-#      - name: 50-network-config.conf
-#        content: |
-#
-#          [Service]
-#          ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{ "Network": "10.1.0.0/16" }'
+      - name: 50-network-config.conf
+        content: |
+
+          [Service]
+          ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{ "Network": "192.168.1.158/24" }'
 #      command: start
-      - name: static.network  
-      content: |  
-        [Match]  
-        Name=enp0s3  
+#      - name: static.network  
+#      content: |  
+#        [Match]  
+#        Name=enp0s3  
   
-        [Network]  
-        Address=192.168.1.158/24  
-        Gateway=192.168.1.1  
-        DNS=8.8.8.8  
-        DNS=8.8.4.4
+#        [Network]  
+#        Address=192.168.1.158/24  
+#        Gateway=192.168.1.1  
+#        DNS=8.8.8.8  
+#        DNS=8.8.4.4
     - name: docker-tcp.socket
       command: start
       enable: true
@@ -55,8 +55,9 @@ coreos:
         WantedBy=sockets.target
 users:    
   - name: core  
+    #ssh-keygen -t rsa -b 2048 -C "202840959@qq.com" 这样可以产生正确的key
     ssh-authorized-keys:   
-      - ssh-rsa  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkLjJnK7CX7xVkT64YopHJ9YxRpnEUWDXtfyA1HQtbQclXY98ONQMD/Nru/Olq2TcZCvRjNrg5ow7cSkt8qESPhQ9V0LbPg6y5RMrgOWlp99vWnoLVqlRUXYjSWm/Cvvj/o3hVm0lzUN34KN3Tra1Vn8dUF2ZS6rv8pKmPjBaDQpcYeolpPaX+Vk0tYkAtTBSgEszhIQmb4cZf9EChkP3m73zIC0D8AE92zlZTXUYEjAGH6X+nmxca3E9CfOPUpE4glPPneLISSd/9m7XnXMLrC8uFaBQsqhtL31sSgOh7R6Y93A9DHgO2KWkCZf2exlCxqwPUcPks0XpA9Jn1Xwwp 202840959@qq.com
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCzaFnaEBYvkzuH50kZtFvEYtpo2nyI2omOzM7zT7V1zEuF2BbRuY0KZyQ/UO8yyr1sxoWTRUSsd1JP4kB51TEYebQuV/0ZZDDubOvMNeniKNcz6w+aLldavD0Kf1l8D/TBbJtSO4g1rEOwED5XghU9TyRZTUIeiMssD5AibArESescaqpvklFiN1NvdTDBjBFzF83JUldZHAvpwJVRHN20v3nAjFzbmT7NXHS/nYamnI3ngQOt5ACPWRsQGL831WlZoi3RN7Nxb/14ZEQXMwHST5VgzdpSJdznQYQzMSo+TM+qZqiuDOQEBb+Bjte1RdvnD/OlCWUTlSjlNZ3Ex76J 202840959@qq.com
   - groups:  
       - sudo  
       - docker         
