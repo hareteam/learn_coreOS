@@ -53,3 +53,10 @@ coreos:
 
         [Install]
         WantedBy=sockets.target
+users:    
+  - name: core  
+    ssh-authorized-keys:   
+      - ssh-rsa  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkLjJnK7CX7xVkT64YopHJ9YxRpnEUWDXtfyA1HQtbQclXY98ONQMD/Nru/Olq2TcZCvRjNrg5ow7cSkt8qESPhQ9V0LbPg6y5RMrgOWlp99vWnoLVqlRUXYjSWm/Cvvj/o3hVm0lzUN34KN3Tra1Vn8dUF2ZS6rv8pKmPjBaDQpcYeolpPaX+Vk0tYkAtTBSgEszhIQmb4cZf9EChkP3m73zIC0D8AE92zlZTXUYEjAGH6X+nmxca3E9CfOPUpE4glPPneLISSd/9m7XnXMLrC8uFaBQsqhtL31sSgOh7R6Y93A9DHgO2KWkCZf2exlCxqwPUcPks0XpA9Jn1Xwwp 202840959@qq.com
+  - groups:  
+      - sudo  
+      - docker         
