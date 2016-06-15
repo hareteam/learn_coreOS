@@ -1,5 +1,5 @@
 #cloud-config
-
+hostname: core1
 coreos:
   etcd2:
     #generate a new token for each unique cluster from https://discovery.etcd.io/new
@@ -22,23 +22,21 @@ coreos:
       command: start
     - name: flanneld.service
       drop-ins:
-#另外一种写法
       - name: 50-network-config.conf
         content: |
-
           [Service]
-          ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{ "Network": "192.168.1.158/24" }'
-#      command: start
-#      - name: static.network  
-#      content: |  
-#        [Match]  
-#        Name=enp0s3  
-  
-#        [Network]  
-#        Address=192.168.1.158/24  
-#        Gateway=192.168.1.1  
-#        DNS=8.8.8.8  
-#        DNS=8.8.4.4
+          ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{ "Network": "172.16.201.195/16" }'
+      command: start
+
+    - name: static.network  
+      content: |  
+        [Match]  
+        Name=enp0s3  
+        [Network]  
+        Address=172.16.201.195/24  
+        Gateway=172.16.201.5
+        DNS=8.8.8.8  
+        DNS=8.8.4.4
     - name: docker-tcp.socket
       command: start
       enable: true
