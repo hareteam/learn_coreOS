@@ -2,13 +2,15 @@
   ##先写出网络配置文件
     `sudo vi /etc/systemd/network/static.netwok`
 
-    ```
+    ```javascript
+
         [Match]
           Name=enp0s3 #可以通过执行ifconfig看到网卡名
         [Network]
           Address=192.168.1.158
           Gateway=192.168.1.1
           DNS=192.168.1.1
+
     ```
 
      
